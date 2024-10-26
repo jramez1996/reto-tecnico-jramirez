@@ -7,7 +7,7 @@ const httpJSONBodyParser = require("@middy/http-json-body-parser");
 const addPerson = async (event) => {
   const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-  const { nationalIdentity, name, gender, location, eyeColor, dateBrith } = event.body;
+  const { nationalIdentity, name, gender, location, eyeColor, dateBirth } = event.body; // Corrige el typo aquí
   const createdAt = new Date();
 
   try {
@@ -19,26 +19,25 @@ const addPerson = async (event) => {
       gender,
       location,
       eyeColor,
-      dateBrith,
+      dateBirth, // Asegúrate de que este sea el nombre correcto
       createdAt,
       done: false,
     };
 
-    await dynamodb
-      .put({
-        TableName: "Person",
-        Item: newPerson,  // Aquí no necesitas JSON.stringify()
-      })
-      .promise();
+    await dynamodb.put({
+      TableName: "Person",
+      Item: newPerson,
+    }).promise();
 
     return {
       statusCode: 200,
       body: JSON.stringify(newPerson),
     };
   } catch (error) {
+    console.error("Error adding person:", error); // Agrega logging para depuración
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: error.message }), // Cambié a error.message para mayor claridad
+      body: JSON.stringify({ message: "Error al agregar persona", error: error.message }),
     };
   }
 };
