@@ -1,4 +1,4 @@
-service: app-aws-lambda-crud
+service: reto-aws-lambda-crud
 frameworkVersion: '4.4.7'
 
 provider:
@@ -40,10 +40,10 @@ functions:
           method: get
 resources:
   Resources:
-    PersonTable:  # Changed from Person to PersonTable
+    Person:  # Changed from Person to PersonTable
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: PersonTable   # Updated here as well
+        TableName: Person   # Updated here as well
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
