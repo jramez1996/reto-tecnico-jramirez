@@ -1,0 +1,59 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "My API",
+      "version": "1.0.0",
+      "description": "API description"
+    },
+    "servers": [
+      {
+        "url": "https://{api-id}.execute-api.{region}.amazonaws.com/{stage}",
+       
+          "api-id": {
+            "default": "nb94xoj3e0"
+          },
+          "region": {
+            "default": "us-east-1"
+          },
+          "stage": {
+            "default": "dev"
+          }
+         
+      }
+    ],
+    "paths": {
+      "/hello": {
+        "get": {
+          "summary": "Hello World Endpoint",
+          "description": "Returns a hello world message",
+          "parameters": [
+            {
+              "name": "X-Request-ID",
+              "in": "header",
+              "description": "An optional request ID",
+              "required": false
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["message"]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: My API
+  version: 1.0.0
+  description: API description
+servers:
+  - url: https://{apiId}.execute-api.{region}.amazonaws.com/
+    variables:
+    apiId:
+      default: nb94xoj3e0
+    region:
+      default: us-east-1
+
+paths:
+  /person:
+    post:
+      summary: Add a Person
+      description: Creates a new person in the database.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nationalIdentity:
+                  type: string
+                name:
+                  type: string
+                gender:
+                  type: string
+                location:
+                  type: string
+                eyeColor:
+                  type: string
+                dateBirth:
+                  type: string
+                  format: date
+      responses:
+        '201':
+          description: Person created
+        '400':
+          description: Bad request
+
+  /person/{id}:
+    get:
+      summary: Get a Person
+      description: Retrieves a person by their ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the person to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Person not found
+
+  /persons:
+    get:
+      summary: Get All Persons
+      description: Retrieves a list of all persons in the database.
+      responses:
+        '200':
+          description: A list of persons
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    nationalIdentity:
+                      type: string
+                    name:
+                      type: string
+                    gender:
+                      type: string
+                    location:
+                      type: string
+                    eyeColor:
+                      type: string
+                    dateBirth:
+                      type: string
+                      format: date
+
+  /getStarWars:
+    get:
+      summary: Get Star Wars Data
+      description: Retrieves data related to Star Wars.
+      responses:
+        '200':
+          description: Successful response
+        '404':
+          description: Data not found
+
+  /swagger:
+    get:
+      summary: Swagger Documentation
+      description: Returns Swagger UI documentation for the API.
+      responses:
+        '200':
+          description: Successful response
+
+  /openapi.yml:
+    get:
+      summary: OpenAPI Specification
+      description: Returns the OpenAPI specification for the API.
+      responses:
+        '200':
+          description: Successful response

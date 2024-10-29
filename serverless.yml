@@ -11,7 +11,15 @@ provider:
       Action:
         - dynamodb:*
       Resource:
-        - arn:aws:dynamodb:us-east-1:448885973878:table/Person 
+        - arn:aws:dynamodb:us-east-1:448885973878:table/Person
+  httpApi:
+    cors:
+      allowedOrigins:
+        - '*'
+      allowedHeaders:
+        - Content-Type
+        - Access-Control-Allow-Origin
+        - Authorization
 
 functions:
   addPerson:
@@ -20,30 +28,86 @@ functions:
       - httpApi:
           path: /person
           method: post
+    documentation:
+      summary: "Add a Person"
+      description: "Creates a new person in the database."
+      requestBody:
+        description: "Person object that needs to be added"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nationalIdentity:
+                  type: string
+                name:
+                  type: string
+                gender:
+                  type: string
+                location:
+                  type: string
+                eyeColor:
+                  type: string
+                dateBirth:
+                  type: string
+                  format: date
+
   getPerson:
     handler: src/getPerson.getPerson
     events:
       - httpApi:
           path: /person/{id}
           method: get
+    documentation:
+      summary: "Get a Person"
+      description: "Retrieves a person by their ID."
+      pathParameters:
+        id:
+          description: "ID of the person to retrieve"
+          required: true
+          type: string
+
   getPersons:
     handler: src/getPersons.getPersons
     events:
       - httpApi:
           path: /persons
           method: get
+    documentation:
+      summary: "Get All Persons"
+      description: "Retrieves a list of all persons in the database."
+
   getStarWars:
     handler: src/getStarWars.getStarWars
     events:
       - httpApi:
           path: /getStarWars
           method: get
+    documentation:
+      summary: "Get Star Wars Data"
+      description: "Retrieves data related to Star Wars."
+
+  swagger:
+    handler: src/swagger.swagger
+    events:
+      - http:
+          path: swagger
+          method: get
+
+  openapi:
+    handler: src/openapi.openapi
+    events:
+      - http:
+          path: openapi.yml
+          method: get
+
 resources:
   Resources:
-    Person:  # Changed from Person to PersonTable
+    PersonTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: Person   # Updated here as well
+        TableName: Person
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: id
@@ -51,3 +115,16 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
+
+plugins:
+  - serverless-openapi-documentation
+
+custom:
+  documentation:
+    api:
+      info:
+        title: "My API"
+        version: "1.0.0"
+        description: "API description"
+      servers:
+        - url: "https://api.example.com"  # Cambia esto a la URL de tu API en producción
