@@ -10,26 +10,30 @@ const getStarWars = async (event) => {
       masa: char.mass,
       colorPelo: char.hair_color,
       colorOjos: char.eye_color,
-      aniooNacimiento: char.birth_year,
+      anioNacimiento: char.birth_year, // Corregido a "anioNacimiento"
       genero: char.gender,
-      planetaNatal: char.homeworld, // Aquí puedes agregar más campos si es necesario
+      planetaNatal: char.homeworld,
     }));
     
     return {
-      status: 200,
-      body: {
-        Personas:characters
-      }
+      statusCode: 200, // Cambié 'status' a 'statusCode'
+      body: JSON.stringify({ personas: characters }), // Cambié 'Personas' a 'personas' y usé JSON.stringify
+      headers: {
+        "Content-Type": "application/json", // Añadí cabecera para indicar tipo de contenido
+      },
     };
   } catch (error) {
+    console.error("Error fetching Star Wars characters:", error); // Registro del error
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Error al obtener los personajes' }),
+      headers: {
+        "Content-Type": "application/json", // Añadí cabecera para indicar tipo de contenido
+      },
     };
   }
 };
 
-
 module.exports = {
-  getStarWars
+  getStarWars,
 };

@@ -32,7 +32,7 @@ const addPerson = async (event) => {
       .promise();
 
     return {
-      statusCode: 200,
+      statusCode: 201,/// Cambié a 201 para indicar creación exitosa
       body: JSON.stringify(newPerson),
     };
   } catch (error) {
