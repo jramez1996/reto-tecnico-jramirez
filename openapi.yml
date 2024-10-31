@@ -92,18 +92,3 @@ paths:
         '404':
           description: Data not found
 
-  /swagger:
-    get:
-      summary: Swagger Documentation
-      description: Returns Swagger UI documentation for the API.
-      responses:
-        '200':
-          description: Successful response
-
-  /openapi.yml:
-    get:
-      summary: OpenAPI Specification
-      description: Returns the OpenAPI specification for the API.
-      responses:
-        '200':
-          description: Successful response
