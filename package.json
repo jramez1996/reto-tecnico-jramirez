@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test": "jest",
-    "deploy": " serverless remove  && serverless  deploy --verbose"
+    "deploy": "  serverless  deploy --verbose"
   },
   "dependencies": {
     "@middy/core": "^2.5.3",

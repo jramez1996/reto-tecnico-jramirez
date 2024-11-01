@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: API description
 servers:
-  - url: https://utj4hevhwj.execute-api.us-east-1.amazonaws.com/
+  - url: https://rx074qy4l1.execute-api.us-east-1.amazonaws.com//
 
 paths:
   /person:

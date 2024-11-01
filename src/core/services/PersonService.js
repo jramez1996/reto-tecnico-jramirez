@@ -16,7 +16,8 @@ class PersonService {
   }
 
   async getAll() {
-    return transform(await this.dynamoDBRepository.getAll()) ;
+    const persons = await this.dynamoDBRepository.getAll();
+    return this.transform(persons);
   }
   async transform(persons) {
     return {
