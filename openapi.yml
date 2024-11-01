@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: API description
 servers:
-  - url: https://2znbfffzba.execute-api.us-east-1.amazonaws.com/
+  - url: https://utj4hevhwj.execute-api.us-east-1.amazonaws.com/
 
 paths:
   /person:
@@ -37,23 +37,7 @@ paths:
         '400':
           description: Bad request
 
-  /person/{id}:
-    get:
-      summary: Get a Person
-      description: Retrieves a person by their ID.
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: ID of the person to retrieve
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Successful response
-        '404':
-          description: Person not found
-
+ 
   /persons:
     get:
       summary: Get All Persons

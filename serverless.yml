@@ -23,7 +23,7 @@ provider:
 
 functions:
   addPerson:
-    handler: src/addPerson.addPerson
+    handler: src/adapters/inbound/apiGateway.addPerson
     events:
       - httpApi:
           path: /person
@@ -53,40 +53,22 @@ functions:
                   type: string
                   format: date
 
-  getPerson:
-    handler: src/getPerson.getPerson
-    events:
-      - httpApi:
-          path: /person/{id}
-          method: get
-    documentation:
-      summary: "Get a Person"
-      description: "Retrieves a person by their ID."
-      pathParameters:
-        id:
-          description: "ID of the person to retrieve"
-          required: true
-          type: string
-
+ 
   getPersons:
-    handler: src/getPersons.getPersons
+    handler: src/adapters/inbound/apiGateway.getPersons
     events:
       - httpApi:
           path: /persons
           method: get
-    documentation:
-      summary: "Get All Persons"
-      description: "Retrieves a list of all persons in the database."
+
 
   getStarWars:
-    handler: src/getStarWars.getStarWars
+    handler: src/adapters/inbound/apiGateway.getStarWars
     events:
       - httpApi:
           path: /getStarWars
           method: get
-    documentation:
-      summary: "Get Star Wars Data"
-      description: "Retrieves data related to Star Wars."
+
 
   swagger:
     handler: src/swagger.swagger
